@@ -1,0 +1,31 @@
+{
+    "name": "zoranwong/sub-pub-message-queue",
+    "description": "Use A manager to manage all routes for laravel/lumen",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "ZoranWong",
+            "email": "904110231@qq.com"
+        }
+    ],
+    "require": {
+        "php": "~7.0",
+        "workerman/rabbitmq": "dev-main"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ZoranWong\\SubPubMessageQueue\\": "src"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "repositories": {
+
+    }
+}
