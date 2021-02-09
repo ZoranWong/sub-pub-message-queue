@@ -39,12 +39,17 @@ class RabbitMQBroadcasterListener extends BroadcasterListener
                     $content = $message->content;
                     $payload = json_encode($content, true);
                     $event = $payload['event'];
-                    if ($event) {
-                        if (class_exists($event)) {
-                            Event::dispatch(new $event($payload['data']));
-                        }else{
-                            Event::dispatch($event, $payload['data']);
+                    try{
+                        if ($event) {
+                            if (class_exists($event)) {
+                                Event::dispatch(new $event($payload['data']));
+                            }else{
+                                Event::dispatch($event, $payload['data']);
+                            }
                         }
+                        $channel->ack($message);
+                    }catch (\Exception $exception){
+                       $channel->nack($message);
                     }
 
                 }, $queue);
